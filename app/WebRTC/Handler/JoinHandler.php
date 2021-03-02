@@ -27,7 +27,7 @@ class JoinHandler extends Service implements HandlerInterface
         $data = $protocol->getData();
         if (is_array($data) && $roomId = intval($data['room_id'] ?? 0)) {
             if ($roomId > 0) {
-                di()->get(Room::class)->join($roomId, $frame->fd);
+                di()->get(Room::class)->join($roomId, $response->fd);
                 $response->push((string) new Protocol(
                     Protocol::REPLY,
                     [
