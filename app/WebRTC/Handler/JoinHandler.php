@@ -13,10 +13,11 @@ namespace App\WebRTC\Handler;
 
 use App\WebRTC\HandlerInterface;
 use App\WebRTC\Protocol;
+use Han\Utils\Service;
 use Swoole\Http\Response;
 use Swoole\WebSocket\Frame;
 
-class JoinHandler implements HandlerInterface
+class JoinHandler extends Service implements HandlerInterface
 {
     public function handle(Response $response, Protocol $protocol, Frame $frame): void
     {

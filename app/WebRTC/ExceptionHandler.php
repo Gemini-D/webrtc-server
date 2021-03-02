@@ -12,21 +12,11 @@ declare(strict_types=1);
 namespace App\WebRTC;
 
 use App\Exception\BusinessException;
-use Hyperf\Contract\StdoutLoggerInterface;
+use Han\Utils\Service;
 use Throwable;
 
-class ExceptionHandler
+class ExceptionHandler extends Service
 {
-    /**
-     * @var StdoutLoggerInterface
-     */
-    protected $logger;
-
-    public function __construct(StdoutLoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
-
     public function handle(Throwable $throwable): Protocol
     {
         $code = 500;
