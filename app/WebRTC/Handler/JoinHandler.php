@@ -20,6 +20,5 @@ class JoinHandler extends Service implements HandlerInterface
 {
     public function handle(Response $response, $data, Frame $frame): void
     {
-        
     }
 }
