@@ -14,15 +14,18 @@ use Hyperf\Server\Server;
 
 return [
     'mode' => SWOOLE_BASE,
+    'type' => Hyperf\Server\CoroutineServer::class,
     'servers' => [
         [
             'name' => 'http',
-            'type' => Server::SERVER_HTTP,
+            'type' => Server::SERVER_WEBSOCKET,
             'host' => '0.0.0.0',
             'port' => 9501,
             'sock_type' => SWOOLE_SOCK_TCP,
             'callbacks' => [
-                Event::ON_REQUEST => [Hyperf\HttpServer\Server::class, 'onRequest'],
+                Event::ON_HAND_SHAKE => [Hyperf\WebSocketServer\Server::class, 'onHandShake'],
+                Event::ON_MESSAGE => [Hyperf\WebSocketServer\Server::class, 'onMessage'],
+                Event::ON_CLOSE => [Hyperf\WebSocketServer\Server::class, 'onClose'],
             ],
         ],
     ],
