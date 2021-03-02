@@ -83,6 +83,9 @@ class Protocol implements Arrayable, Jsonable
         return $this->protocol;
     }
 
+    /**
+     * @return $this
+     */
     public function setProtocol(string $protocol)
     {
         $this->protocol = $protocol;
@@ -94,9 +97,31 @@ class Protocol implements Arrayable, Jsonable
         return $this->data;
     }
 
+    /**
+     * @param mixed $data
+     * @return $this
+     */
     public function setData($data)
     {
         $this->data = $data;
+        return $this;
+    }
+
+    /**
+     * @return null|int|string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param null|int|string $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
         return $this;
     }
 }

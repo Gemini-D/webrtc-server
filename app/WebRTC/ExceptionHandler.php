@@ -38,7 +38,8 @@ class ExceptionHandler extends Service
             [
                 'code' => $code,
                 'message' => $message,
-            ]
+            ],
+            $protocol ? $protocol->getId() : null
         );
     }
 }
