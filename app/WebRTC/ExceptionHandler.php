@@ -17,7 +17,7 @@ use Throwable;
 
 class ExceptionHandler extends Service
 {
-    public function handle(Throwable $throwable): Protocol
+    public function handle(Throwable $throwable, ?Protocol $protocol = null): Protocol
     {
         $code = 500;
         $message = 'Server Error';

@@ -28,4 +28,9 @@ class ErrorCode extends AbstractConstants
      * @Message("协议非法")
      */
     const PROTOCOL_INVALID = 1000;
+
+    /**
+     * @Message("房间不存在")
+     */
+    const ROOM_NOT_EXISTS = 1001;
 }

@@ -66,9 +66,9 @@ class WebRTCController extends Controller implements OnOpenInterface, OnMessageI
                 return;
             }
 
-            $handler->handle($server, $protocol->getData(), $frame);
+            $handler->handle($server, $protocol, $frame);
         } catch (\Throwable $exception) {
-            $server->push((string) $this->exception->handle($exception));
+            $server->push((string) $this->exception->handle($exception, $protocol ?? null));
         }
     }
 

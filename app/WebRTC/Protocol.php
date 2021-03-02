@@ -23,6 +23,8 @@ class Protocol implements Arrayable, Jsonable
 
     const ALERT = 'alert';
 
+    const REPLY = 'reply';
+
     const JOIN_ROOM = 'join';
 
     const CLIENT_CALL = 'client.call';
@@ -41,10 +43,16 @@ class Protocol implements Arrayable, Jsonable
      */
     protected $data;
 
-    public function __construct(string $protocol, $data)
+    /**
+     * @var null|int|string
+     */
+    protected $id;
+
+    public function __construct(string $protocol, $data, $id)
     {
         $this->protocol = $protocol;
         $this->data = $data;
+        $this->id = $id;
     }
 
     public function __toString(): string
@@ -58,13 +66,14 @@ class Protocol implements Arrayable, Jsonable
             throw new BusinessException(ErrorCode::PROTOCOL_INVALID);
         }
 
-        return new Protocol((string) $data['protocol'], $data['data'] ?? null);
+        return new Protocol((string) $data['protocol'], $data['data'] ?? null, $data['id'] ?? null);
     }
 
     public function toArray(): array
     {
         return [
             'protocol' => $this->protocol,
+            'id' => $this->id,
             'data' => $this->data,
         ];
     }
