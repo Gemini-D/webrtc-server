@@ -11,6 +11,8 @@ declare(strict_types=1);
  */
 namespace App\WebRTC;
 
+use App\Constants\ErrorCode;
+use App\Exception\BusinessException;
 use Hyperf\Utils\Codec\Json;
 use Hyperf\Utils\Contracts\Arrayable;
 use Hyperf\Utils\Contracts\Jsonable;
@@ -47,13 +49,45 @@ class Protocol implements Arrayable, Jsonable
 
     public function __toString(): string
     {
-        return Json::encode([
-            'protocol' => $this->protocol,
-            'data' => $this->data,
-        ]);
+        return Json::encode($this->toArray());
+    }
+
+    public static function make($data): Protocol
+    {
+        if (! is_array($data) || empty($data['protocol'])) {
+            throw new BusinessException(ErrorCode::PROTOCOL_INVALID);
+        }
+
+        return new Protocol((string) $data['protocol'], $data['data'] ?? null);
     }
 
     public function toArray(): array
     {
+        return [
+            'protocol' => $this->protocol,
+            'data' => $this->data,
+        ];
+    }
+
+    public function getProtocol(): string
+    {
+        return $this->protocol;
+    }
+
+    public function setProtocol(string $protocol)
+    {
+        $this->protocol = $protocol;
+        return $this;
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function setData($data)
+    {
+        $this->data = $data;
+        return $this;
     }
 }

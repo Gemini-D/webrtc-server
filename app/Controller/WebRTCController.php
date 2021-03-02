@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\WebRTC\ExceptionHandler;
+use App\WebRTC\HandlerInterface;
+use App\WebRTC\Protocol;
 use Hyperf\Contract\OnCloseInterface;
 use Hyperf\Contract\OnMessageInterface;
 use Hyperf\Contract\OnOpenInterface;
@@ -53,6 +55,18 @@ class WebRTCController extends Controller implements OnOpenInterface, OnMessageI
     public function onMessage($server, Frame $frame): void
     {
         try {
+            $protocol = Protocol::make(Json::decode($frame->data));
+            $name = sprintf('WebRTC.%s.handler', $protocol->getProtocol());
+            if (! $this->container->has($name)) {
+                return;
+            }
+
+            $handler = $this->container->get($name);
+            if (! $handler instanceof HandlerInterface) {
+                return;
+            }
+
+            $handler->handle($server, $protocol, $frame);
         } catch (\Throwable $exception) {
             $server->push((string) $this->exception->handle($exception));
         }

@@ -23,4 +23,9 @@ class ErrorCode extends AbstractConstants
      * @Message("Server Error")
      */
     const SERVER_ERROR = 500;
+
+    /**
+     * @Message("协议非法")
+     */
+    const PROTOCOL_INVALID = 1000;
 }
