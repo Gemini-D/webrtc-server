@@ -16,5 +16,5 @@ use Swoole\WebSocket\Frame;
 
 interface HandlerInterface
 {
-    public function handle(Response $response, Protocol $protocol, Frame $frame): void;
+    public function handle(Response $response, $data, Frame $frame): void;
 }
