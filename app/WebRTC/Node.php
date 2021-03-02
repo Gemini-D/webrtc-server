@@ -11,10 +11,20 @@ declare(strict_types=1);
  */
 namespace App\WebRTC;
 
-use Swoole\Http\Response;
-use Swoole\WebSocket\Frame;
-
-interface HandlerInterface
+class Node
 {
-    public function handle(Response $response, Protocol $protocol, Frame $frame): void;
+    /**
+     * @var string
+     */
+    protected $id;
+
+    public function __construct()
+    {
+        $this->id = uniqid();
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
 }

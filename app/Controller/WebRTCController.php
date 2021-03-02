@@ -56,7 +56,7 @@ class WebRTCController extends Controller implements OnOpenInterface, OnMessageI
     {
         try {
             $protocol = Protocol::make(Json::decode($frame->data));
-            $name = sprintf('WebRTC.%s.handler', $protocol->getProtocol());
+            $name = sprintf('WebRTC.%s', $protocol->getProtocol());
             if (! $this->container->has($name)) {
                 return;
             }

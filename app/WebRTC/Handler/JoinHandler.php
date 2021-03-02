@@ -9,12 +9,17 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-namespace App\WebRTC;
+namespace App\WebRTC\Handler;
 
+use App\WebRTC\HandlerInterface;
+use App\WebRTC\Protocol;
 use Swoole\Http\Response;
 use Swoole\WebSocket\Frame;
 
-interface HandlerInterface
+class JoinHandler implements HandlerInterface
 {
-    public function handle(Response $response, Protocol $protocol, Frame $frame): void;
+    public function handle(Response $response, Protocol $protocol, Frame $frame): void
+    {
+        $response->push($protocol->__toString());
+    }
 }
